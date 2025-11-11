@@ -1,0 +1,5 @@
+# Initial configuration options
+app/storage/*
+app/public/assets/*
+app/config.php
+
