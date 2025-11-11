@@ -1,0 +1,8 @@
+cip-ai-forum-hello:
+  # For more details on the format
+  # Checkout https://docs.flarum.org/extend/i18n/#appendix-a-standard-key-format
+  admin:
+    my_cool_key: My Cool Key
+
+  forum:
+    say_hello: "Say Hello (1.x)"
