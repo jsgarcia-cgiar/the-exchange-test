@@ -46,7 +46,9 @@ COPY docker/nginx.conf /etc/nginx/nginx.conf
 
 # supervisord config (run php-fpm + nginx)
 RUN mkdir -p /etc/supervisor.d
+COPY docker/supervisord.conf /etc/supervisord.conf
 RUN printf "[program:php-fpm]\ncommand=/usr/sbin/php-fpm82 -F\n\n[program:nginx]\ncommand=/usr/sbin/nginx -g 'daemon off;'\n" > /etc/supervisor.d/services.ini
+
 
 # Permissions (Flarum needs to write to these)
 RUN adduser -D -H -u 1000 flarum \
