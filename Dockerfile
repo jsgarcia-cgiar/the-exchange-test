@@ -52,15 +52,24 @@ RUN printf "[program:php-fpm]\ncommand=/usr/sbin/php-fpm82 -F\n\n[program:nginx]
 
 # Permissions (Flarum needs to write to these)
 RUN adduser -D -H -u 1000 flarum \
- && mkdir -p /var/www/app/storage /var/www/app/public/assets \
+ && mkdir -p /var/www/app/storage /var/www/app/storage/tmp /var/www/app/public/assets \
  && chown -R flarum:flarum /var/www/app \
  && chmod -R 775 /var/www/app/storage /var/www/app/public/assets \
  && mkdir -p /var/lib/nginx/tmp /run/nginx \
  && mkdir -p /run/php-fpm /var/log/nginx /var/log/php82 \
  && chown -R flarum:flarum /var/lib/nginx /run/nginx /run/php-fpm /var/log/nginx /var/log/php82
 
+# PHP runtime overrides and entrypoint
+COPY docker/php-overrides.ini /etc/php82/conf.d/zz-overrides.ini
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Ensure php-fpm runs as flarum to match writable dirs
+COPY docker/php-fpm-www.conf /etc/php82/php-fpm.d/z-www-override.conf
+
 USER flarum
 
 EXPOSE 8080
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["/usr/bin/supervisord","-c","/etc/supervisord.conf"]
 
