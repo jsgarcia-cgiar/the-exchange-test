@@ -25,9 +25,7 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 # Build Flarum frontend assets (extension + core)
 # The CLI scaffolds npm scripts inside the extension; core assets are prebuilt,
 # but we clear Flarum cache to pick up extension assets.
-RUN php flarum cache:clear \
- && (cd ../extensions/ai-forum-hello && npm ci && npm run build) \
- && php flarum cache:clear
+RUN cd ../extensions/ai-forum-hello/js && npm ci && npm run build
 
 # ---- Runtime image with nginx + php-fpm via supervisord ----
 FROM alpine:3.20
