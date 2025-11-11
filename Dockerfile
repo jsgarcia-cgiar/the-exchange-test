@@ -32,7 +32,7 @@ FROM alpine:3.20
 
 # runtime deps
 RUN apk add --no-cache nginx supervisor bash curl php82 php82-fpm \
-    php82-pdo php82-pdo_mysql php82-intl php82-gd php82-mbstring php82-opcache php82-zip php82-session
+    php82-pdo php82-pdo_mysql php82-intl php82-gd php82-mbstring php82-opcache php82-zip php82-session php82-dom php82-tokenizer
 
 # (Optional) link php -> php82 for CLI commands
 RUN ln -s /usr/bin/php82 /usr/bin/php
@@ -54,7 +54,8 @@ RUN printf "[program:php-fpm]\ncommand=/usr/sbin/php-fpm82 -F\n\n[program:nginx]
 RUN adduser -D -H -u 1000 flarum \
  && chown -R flarum:flarum /var/www/app \
  && mkdir -p /var/lib/nginx/tmp /run/nginx \
- && chown -R flarum:flarum /var/lib/nginx /run/nginx
+ && mkdir -p /run/php-fpm /var/log/nginx /var/log/php82 \
+ && chown -R flarum:flarum /var/lib/nginx /run/nginx /run/php-fpm /var/log/nginx /var/log/php82
 
 USER flarum
 
