@@ -40,6 +40,7 @@ RUN ln -s /usr/bin/php82 /usr/bin/php
 # Copy app from builder
 WORKDIR /var/www/app
 COPY --from=builder /var/www/app /var/www/app
+COPY --from=builder /var/www/extensions /var/www/extensions
 
 # nginx config
 COPY docker/nginx.conf /etc/nginx/nginx.conf
