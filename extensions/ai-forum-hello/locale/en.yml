@@ -2,7 +2,10 @@ cip-ai-forum-hello:
   # For more details on the format
   # Checkout https://docs.flarum.org/extend/i18n/#appendix-a-standard-key-format
   admin:
-    my_cool_key: My Cool Key
+    settings:
+      image_url_label: "Banner image URL"
+      image_alt_label: "Banner image alt text"
 
   forum:
     say_hello: "Say Hello (1.x)"
+    banner_alt: "Forum banner"

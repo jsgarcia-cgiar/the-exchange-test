@@ -20,7 +20,12 @@ return [
     (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js')
         ->css(__DIR__.'/less/admin.less'),
+    (new Extend\Settings())
+        ->default('cip-ai-forum-hello.image_url', '/assets/extensions/cip-ai-forum-hello/graph-view.png')
+        ->default('cip-ai-forum-hello.image_alt', 'Forum banner')
+        ->serializeToForum('aiForumHello.imageUrl', 'cip-ai-forum-hello.image_url')
+        ->serializeToForum('aiForumHello.imageAlt', 'cip-ai-forum-hello.image_alt'),
     new Extend\Locales(__DIR__.'/locale'),
     (new Extend\Routes('api'))
-        ->post('/ai-hello/click', 'ai-hello.click', \Cip\AiForumHello::class),
+        ->post('/ai-hello/click', 'ai-hello.click', \Cip\AiForumHello\Api\Controllers\ClickController::class),
 ];

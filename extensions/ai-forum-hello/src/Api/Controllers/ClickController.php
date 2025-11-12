@@ -1,17 +1,12 @@
 <?php
 
-namespace Cip\AiForumHello\Api/Controllers;
+namespace Cip\AiForumHello\Api\Controllers;
 
-use Flarum\Api\Controller\AbstractSerializeController;
-use Psr\Http\Message\ServerRequestInterface;
-use Tobscure\JsonApi\Collection;
-use Tobscure\JsonApi\Resource;
-use Tobscure\JsonApi\SerializerInterface;
-use Cip\AiForumHello;
 use Flarum\Http\RequestUtil;
 use Illuminate\Support\Facades\DB;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class ClickController
 {
